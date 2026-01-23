@@ -1,0 +1,30 @@
+OS Experiment-20
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char user[20], files[10][20];
+    int n = 0, choice;
+
+    printf("Enter user name: ");
+    scanf("%s", user);
+
+    while(1) {
+        printf("\n1.Create File  2.Display Files  3.Exit\n");
+        scanf("%d", &choice);
+
+        if(choice == 1) {
+            printf("Enter file name: ");
+            scanf("%s", files[n++]);
+        }
+        else if(choice == 2) {
+            printf("Files of user %s:\n", user);
+            for(int i = 0; i < n; i++)
+                printf("%s\n", files[i]);
+        }
+        else
+            break;
+    }
+    return 0;
+}
