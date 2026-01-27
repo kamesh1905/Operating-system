@@ -1,0 +1,41 @@
+Experiment 06-Round Robin Scheduling 
+
+#include <stdio.h>
+
+int main() {
+    int n, tq, i, time = 0;
+    int bt[10], rt[10];
+
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+
+    printf("Enter burst times:\n");
+    for(i = 0; i < n; i++) {
+        scanf("%d", &bt[i]);
+        rt[i] = bt[i];
+    }
+
+    printf("Enter time quantum: ");
+    scanf("%d", &tq);
+
+    while(1) {
+        int done = 1;
+        for(i = 0; i < n; i++) {
+            if(rt[i] > 0) {
+                done = 0;
+                if(rt[i] > tq) {
+                    time += tq;
+                    rt[i] -= tq;
+                } else {
+                    time += rt[i];
+                    rt[i] = 0;
+                }
+            }
+        }
+        if(done == 1)
+            break;
+    }
+
+    printf("Total Time = %d\n", time);
+    return 0;
+}
