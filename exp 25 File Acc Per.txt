@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <sys/stat.h>
+
+int main() {
+    struct stat fileStat;
+    if (stat("example.txt", &fileStat) < 0) {
+        perror("stat");
+        return 1;
+    }
+
+    printf("File Permissions:\n");
+
+    // Owner permissions
+    printf("Owner  : ");
+    printf((fileStat.st_mode & S_IRUSR) ? "r" : "-");
+    printf((fileStat.st_mode & S_IWUSR) ? "w" : "-");
+    printf((fileStat.st_mode & S_IXUSR) ? "x\n" : "-\n");
+
+    // Group permissions
+    printf("Group  : ");
+    printf((fileStat.st_mode & S_IRGRP) ? "r" : "-");
+    printf((fileStat.st_mode & S_IWGRP) ? "w" : "-");
+    printf((fileStat.st_mode & S_IXGRP) ? "x\n" : "-\n");
+
+    // Others permissions
+    printf("Others : ");
+    printf((fileStat.st_mode & S_IROTH) ? "r" : "-");
+    printf((fileStat.st_mode & S_IWOTH) ? "w" : "-");
+    printf((fileStat.st_mode & S_IXOTH) ? "x\n" : "-\n");
+
+    return 0;
+}
